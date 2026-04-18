@@ -1,0 +1,307 @@
+/* Presellia Pricing Studio — styles admin */
+
+.pps-wrap { max-width: 100%; }
+
+/* ------------------------------------------------------------------ */
+/* Barre de contrôles                                                   */
+/* ------------------------------------------------------------------ */
+
+.pps-controls-bar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background: #fff;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	padding: 12px 16px;
+	margin-bottom: 10px;
+	gap: 16px;
+	flex-wrap: wrap;
+}
+.pps-controls-left  { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.pps-controls-right { display: flex; align-items: center; gap: 10px; }
+
+.pps-rate-label { display: flex; align-items: center; gap: 6px; font-weight: 600; font-size: 13px; }
+.pps-rate-input { width: 90px !important; }
+.pps-select     { min-width: 160px; }
+.pps-search     { min-width: 200px; }
+
+#pps-save-status { font-size: 12px; color: #555; }
+
+/* ------------------------------------------------------------------ */
+/* Légende                                                              */
+/* ------------------------------------------------------------------ */
+
+.pps-legend {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	flex-wrap: wrap;
+	font-size: 12px;
+	color: #666;
+	margin-bottom: 10px;
+}
+.pps-leg-good { color: #155724; font-size: 14px; }
+.pps-leg-ok   { color: #856404; font-size: 14px; }
+.pps-leg-bad  { color: #721c24; font-size: 14px; }
+
+/* ------------------------------------------------------------------ */
+/* Table wrapper                                                        */
+/* ------------------------------------------------------------------ */
+
+.pps-table-wrap { overflow-x: auto; border: 1px solid #ddd; border-radius: 4px; }
+
+.pps-table {
+	min-width: 1640px;
+	border-collapse: collapse;
+	font-size: 13px;
+	margin: 0;
+}
+
+/* ------------------------------------------------------------------ */
+/* En-têtes groupes                                                     */
+/* ------------------------------------------------------------------ */
+
+.pps-thead-groups th {
+	text-align: center;
+	font-size: 11px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: .05em;
+	padding: 6px 8px;
+	border-bottom: 2px solid #c8c8c8;
+	white-space: nowrap;
+}
+
+.pps-gh-product  { background: #f0f0f0; }
+.pps-gh-costs    { background: #ddeeff; border-left: 2px solid #99c4e8; }
+.pps-gh-client   { background: #ddffdd; border-left: 2px solid #99c899; }
+.pps-gh-partner  { background: #fff5dd; border-left: 2px solid #d4b87a; }
+.pps-gh-margins  { background: #ffdddd; border-left: 2px solid #d4909a; }
+.pps-gh-analytics { background: #f0ddff; border-left: 2px solid #b899d4; }
+
+/* ------------------------------------------------------------------ */
+/* En-têtes colonnes                                                    */
+/* ------------------------------------------------------------------ */
+
+.pps-thead-cols th {
+	padding: 7px 6px;
+	font-size: 11px;
+	white-space: nowrap;
+	background: #fafafa;
+	border-bottom: 1px solid #ddd;
+	color: #444;
+}
+
+/* Séparateurs de groupes dans le thead cols */
+.pps-thead-cols .pps-group-costs    { border-left: 2px solid #99c4e8; }
+.pps-thead-cols .pps-group-client   { border-left: 2px solid #99c899; }
+.pps-thead-cols .pps-group-partner  { border-left: 2px solid #d4b87a; }
+.pps-thead-cols .pps-group-margins  { border-left: 2px solid #d4909a; }
+.pps-thead-cols .pps-group-analytics { border-left: 2px solid #b899d4; }
+
+/* ------------------------------------------------------------------ */
+/* En-têtes de catégorie                                                */
+/* ------------------------------------------------------------------ */
+
+.pps-cat-header td {
+	background: #23282d;
+	color: #eee;
+	padding: 5px 12px;
+	font-size: 11px;
+	letter-spacing: .07em;
+	text-transform: uppercase;
+}
+
+/* ------------------------------------------------------------------ */
+/* Lignes produits                                                      */
+/* ------------------------------------------------------------------ */
+
+.pps-table tr.pps-row-product td,
+.pps-table tr.pps-row-parent td,
+.pps-table tr.pps-row-variation td {
+	padding: 5px 6px;
+	vertical-align: middle;
+	border-bottom: 1px solid #f0f0f0;
+}
+
+.pps-row-variation td { background: #fefefe; }
+.pps-row-product:hover td,
+.pps-row-parent:hover td,
+.pps-row-variation:hover td { background: #f6f9ff; }
+
+/* Séparateurs de groupes dans le tbody */
+.pps-group-costs    { border-left: 2px solid #c8dff0; }
+.pps-group-client   { border-left: 2px solid #c0dac0; }
+.pps-group-partner  { border-left: 2px solid #d8c898; }
+.pps-group-margins  { border-left: 2px solid #d8b0b8; }
+.pps-group-analytics { border-left: 2px solid #c8b0d8; }
+
+/* ------------------------------------------------------------------ */
+/* Colonne nom                                                          */
+/* ------------------------------------------------------------------ */
+
+.pps-col-name { min-width: 200px; max-width: 280px; }
+.pps-var-indent { color: #aaa; margin-right: 4px; }
+.pps-product-name { font-weight: 500; }
+
+.pps-status-publish { color: #46b450; }
+.pps-status-draft   { color: #aaa; }
+.pps-status-private { color: #f56e28; }
+
+.pps-stock {
+	font-size: 10px;
+	padding: 1px 5px;
+	border-radius: 10px;
+	margin-left: 4px;
+	font-weight: 600;
+	white-space: nowrap;
+}
+.pps-stock-in  { background: #d4edda; color: #155724; }
+.pps-stock-out { background: #f8d7da; color: #721c24; }
+
+/* ------------------------------------------------------------------ */
+/* Inputs                                                               */
+/* ------------------------------------------------------------------ */
+
+.pps-input {
+	width: 78px !important;
+	padding: 3px 5px !important;
+	font-size: 12px !important;
+	height: 26px !important;
+	box-sizing: border-box;
+}
+.pps-col-cost-cfa .pps-input { width: 88px !important; }
+
+.pps-cfa-wrap  { display: flex; align-items: center; gap: 3px; }
+.pps-fees-wrap { display: flex; align-items: center; gap: 3px; }
+.pps-fees-wrap .pps-input { width: 52px !important; }
+.pps-fees-wrap span { font-size: 12px; color: #555; }
+
+.pps-manual-badge {
+	font-size: 12px;
+	color: #f56e28;
+	cursor: help;
+	line-height: 1;
+}
+.pps-reset-manual {
+	font-size: 11px;
+	color: #aaa;
+	padding: 0 2px;
+	line-height: 1;
+	text-decoration: none !important;
+}
+.pps-reset-manual:hover { color: #2271b1; }
+
+/* ------------------------------------------------------------------ */
+/* Cellules calculées / lecture seule                                   */
+/* ------------------------------------------------------------------ */
+
+.pps-readonly {
+	color: #555;
+	font-size: 12px;
+	white-space: nowrap;
+}
+.pps-col-cost-total { font-weight: 600; font-size: 12px; }
+.pps-parent-placeholder { color: #bbb; font-style: italic; font-size: 11px; }
+
+/* ------------------------------------------------------------------ */
+/* Marges (code couleur)                                                */
+/* ------------------------------------------------------------------ */
+
+.pps-margin-cell {
+	font-weight: 700;
+	text-align: center;
+	min-width: 58px;
+	font-size: 12px;
+}
+.pps-margin-good { background: #d4edda; color: #155724; }
+.pps-margin-ok   { background: #fff3cd; color: #856404; }
+.pps-margin-bad  { background: #f8d7da; color: #721c24; }
+
+/* ------------------------------------------------------------------ */
+/* Analytics                                                            */
+/* ------------------------------------------------------------------ */
+
+.pps-analytics-cell {
+	text-align: center;
+	color: #666;
+	font-size: 12px;
+	min-width: 58px;
+	white-space: nowrap;
+}
+.pps-analytics-loading { color: #bbb !important; animation: pps-pulse 1.2s infinite; }
+@keyframes pps-pulse { 0%, 100% { opacity: 1 } 50% { opacity: .25 } }
+
+/* ------------------------------------------------------------------ */
+/* Toggle variations                                                    */
+/* ------------------------------------------------------------------ */
+
+.pps-toggle-vars {
+	font-size: 13px;
+	color: #555;
+	padding: 0 3px;
+	margin-right: 2px;
+	cursor: pointer;
+	transition: transform .15s;
+	text-decoration: none !important;
+}
+.pps-toggle-vars.collapsed { transform: rotate(-90deg); display: inline-block; }
+
+/* ------------------------------------------------------------------ */
+/* Paliers (tiers editor)                                               */
+/* ------------------------------------------------------------------ */
+
+.pps-tiers-row td {
+	background: #f4f7fb !important;
+	padding: 10px 16px !important;
+}
+
+.pps-tiers-btn {
+	font-size: 11px;
+	color: #2271b1;
+	white-space: nowrap;
+	text-decoration: none;
+	cursor: pointer;
+}
+.pps-tiers-btn:hover { text-decoration: underline; }
+
+.pps-tiers-editor { display: flex; align-items: flex-start; gap: 14px; flex-wrap: wrap; }
+
+.pps-tiers-table { border-collapse: collapse; font-size: 12px; }
+.pps-tiers-table th { padding: 4px 10px; background: #edf2f7; border: 1px solid #ddd; font-size: 11px; }
+.pps-tiers-table td { padding: 3px 6px; border: 1px solid #ddd; }
+.pps-tiers-table input { width: 68px !important; padding: 2px 4px !important; height: 24px !important; }
+
+.pps-tier-delete {
+	color: #d63638;
+	padding: 0 4px;
+	font-size: 14px;
+	line-height: 1;
+	text-decoration: none !important;
+}
+.pps-tiers-actions { display: flex; flex-direction: column; gap: 6px; align-self: flex-end; }
+.pps-tiers-hint { font-size: 11px; color: #888; }
+
+/* ------------------------------------------------------------------ */
+/* Bouton save par ligne                                                 */
+/* ------------------------------------------------------------------ */
+
+.pps-col-save { white-space: nowrap; min-width: 50px; }
+.pps-save-row { padding: 1px 7px !important; min-height: unset !important; height: 22px !important; }
+.pps-row-status { font-size: 11px; margin-left: 4px; }
+.pps-row-saved { color: #46b450; }
+.pps-row-error { color: #d63638; }
+
+/* ------------------------------------------------------------------ */
+/* Barre save bas de page                                               */
+/* ------------------------------------------------------------------ */
+
+.pps-save-bar-bottom {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin-top: 14px;
+	padding: 10px 0;
+}
+.pps-save-status-bottom { font-size: 12px; color: #555; }
