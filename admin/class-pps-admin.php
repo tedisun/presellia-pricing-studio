@@ -64,6 +64,7 @@ class PPS_Admin {
 			'ajaxUrl'    => admin_url( 'admin-ajax.php' ),
 			'nonce'      => wp_create_nonce( 'pps_nonce' ),
 			'usdCfaRate' => PPS_Data::get_usd_cfa_rate(),
+			'feesPct'    => PPS_Data::get_fees_pct(),
 			'hasPpb'     => PPS_Data::has_ppb(),
 			'i18n'       => [
 				'saving'  => __( 'Enregistrement...', 'presellia-pricing-studio' ),
@@ -165,7 +166,7 @@ class PPS_Admin {
 			<td class="pps-col-sku"><?php echo esc_html( $product['sku'] ); ?></td>
 
 			<?php if ( $has_vars ) : ?>
-				<td colspan="4" class="pps-col-costs pps-parent-placeholder">
+				<td colspan="3" class="pps-col-costs pps-parent-placeholder">
 					<em><?php esc_html_e( 'Voir variations ↓', 'presellia-pricing-studio' ); ?></em>
 				</td>
 			<?php else : ?>
@@ -183,13 +184,6 @@ class PPS_Admin {
 							<?php echo ! $product['cost_manual'] ? 'style="display:none"' : ''; ?>>✎</span>
 						<button type="button" class="pps-reset-manual button-link" title="Recalculer depuis USD"
 							<?php echo ! $product['cost_manual'] ? 'style="display:none"' : ''; ?>>↺</button>
-					</div>
-				</td>
-				<td class="pps-col-fees pps-group-costs">
-					<div class="pps-fees-wrap">
-						<input type="number" class="pps-input pps-fees-pct" min="0" max="100" step="0.1"
-							value="<?php echo esc_attr( $product['fees_pct'] ); ?>" placeholder="0">
-						<span>%</span>
 					</div>
 				</td>
 				<td class="pps-col-cost-total pps-group-costs pps-readonly" title="Coût CFA de référence (sans frais paiement)">
@@ -271,7 +265,7 @@ class PPS_Admin {
 	private function render_tiers_row( int $id ): void {
 		?>
 		<tr class="pps-tiers-row" data-for="<?php echo esc_attr( $id ); ?>" style="display:none">
-			<td colspan="18" class="pps-tiers-cell">
+			<td colspan="17" class="pps-tiers-cell">
 				<div class="pps-tiers-editor">
 					<table class="pps-tiers-table">
 						<thead>
@@ -315,6 +309,11 @@ class PPS_Admin {
 			}
 		}
 
+		if ( isset( $_POST['fees_pct'] ) ) {
+			$fees = (float) sanitize_text_field( wp_unslash( (string) $_POST['fees_pct'] ) );
+			PPS_Data::save_fees_pct( $fees );
+		}
+
 		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		$raw           = isset( $_POST['products'] ) ? wp_unslash( $_POST['products'] ) : '{}';
 		$products_data = json_decode( (string) $raw, true );
@@ -334,7 +333,7 @@ class PPS_Admin {
 
 			$data = [];
 
-			$text_fields = [ 'cost_cfa', 'cost_usd', 'fees_pct', 'partner_price' ];
+			$text_fields = [ 'cost_cfa', 'cost_usd', 'partner_price' ];
 			foreach ( $text_fields as $key ) {
 				if ( isset( $fields[ $key ] ) ) {
 					$data[ $key ] = sanitize_text_field( (string) $fields[ $key ] );

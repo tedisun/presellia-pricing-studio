@@ -28,7 +28,7 @@ function recalcAll() {
 
 function recalcRow( row ) {
 	const costCfa      = parseFloat( row.querySelector( '.pps-cost-cfa' )?.value )      || 0;
-	const feesPct      = parseFloat( row.querySelector( '.pps-fees-pct' )?.value )      || 0;
+	const feesPct      = parseFloat( document.getElementById( 'pps-global-fees' )?.value ) || ppsStudio.feesPct || 0;
 	const partnerPrice = parseFloat( row.querySelector( '.pps-partner-price' )?.value ) || 0;
 	const priceRegular = parseFloat( row.dataset.priceRegular ) || 0;
 	const priceSale    = parseFloat( row.dataset.priceSale )    || 0;
@@ -231,10 +231,7 @@ function bindEvents() {
 			handleUsdChange( row, e.target );
 		} else if ( e.target.classList.contains( 'pps-cost-cfa' ) ) {
 			handleCfaChange( row, e.target );
-		} else if (
-			e.target.classList.contains( 'pps-fees-pct' ) ||
-			e.target.classList.contains( 'pps-partner-price' )
-		) {
+		} else if ( e.target.classList.contains( 'pps-partner-price' ) ) {
 			recalcRow( row );
 		}
 	} );
@@ -299,8 +296,9 @@ function bindEvents() {
 		}
 	} );
 
-	// Taux global
+	// Taux global et frais globaux
 	document.getElementById( 'pps-global-rate' )?.addEventListener( 'input', onGlobalRateChange );
+	document.getElementById( 'pps-global-fees' )?.addEventListener( 'input', recalcAll );
 
 	// Filtre catégorie
 	document.getElementById( 'pps-filter-cat' )?.addEventListener( 'change', e => {
@@ -346,7 +344,8 @@ async function saveRow( id ) {
 
 	try {
 		const result = await doAjax( 'pps_bulk_save', {
-			rate:     document.getElementById( 'pps-global-rate' )?.value || '',
+			rate:     document.getElementById( 'pps-global-rate' )?.value  || '',
+			fees_pct: document.getElementById( 'pps-global-fees' )?.value  || '',
 			products: JSON.stringify( products ),
 		} );
 
@@ -379,7 +378,8 @@ async function bulkSave() {
 
 	try {
 		const result = await doAjax( 'pps_bulk_save', {
-			rate:     document.getElementById( 'pps-global-rate' )?.value || '',
+			rate:     document.getElementById( 'pps-global-rate' )?.value  || '',
+			fees_pct: document.getElementById( 'pps-global-fees' )?.value  || '',
 			products: JSON.stringify( products ),
 		} );
 
@@ -403,7 +403,6 @@ function collectRowData( row, tiers ) {
 		cost_usd:          row.querySelector( '.pps-cost-usd' )?.value      || '',
 		cost_cfa:          cfaInput?.value                                   || '',
 		cost_cfa_is_manual: cfaInput?.dataset.wasManual === '1' ? '1' : '0',
-		fees_pct:          row.querySelector( '.pps-fees-pct' )?.value      || '',
 		partner_price:     row.querySelector( '.pps-partner-price' )?.value || '',
 		partner_tiers:     JSON.stringify( tiers ),
 	};

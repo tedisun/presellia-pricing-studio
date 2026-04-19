@@ -16,13 +16,16 @@ class PPS_Data {
 	const META_COST_CFA      = '_wc_cog_cost';
 	const META_COST_MANUAL   = '_pps_cost_cfa_is_manual';
 	const META_COST_USD      = '_pps_cost_usd';
-	const META_FEES_PCT      = '_pps_other_fees_pct';
 	const META_PARTNER_PRICE = '_ppb_partner_price';
 	const META_PARTNER_TIERS = '_ppb_partner_tiers';
 
 	public static function has_ppb(): bool {
 		return class_exists( 'PPB_Pricing' );
 	}
+
+	// -------------------------------------------------------------------------
+	// Options globales
+	// -------------------------------------------------------------------------
 
 	public static function get_usd_cfa_rate(): float {
 		return max( 1.0, (float) get_option( 'pps_usd_cfa_rate', 655 ) );
@@ -32,8 +35,16 @@ class PPS_Data {
 		update_option( 'pps_usd_cfa_rate', (string) max( 1.0, $rate ) );
 	}
 
+	public static function get_fees_pct(): float {
+		return max( 0.0, (float) get_option( 'pps_other_fees_pct', 0 ) );
+	}
+
+	public static function save_fees_pct( float $pct ): void {
+		update_option( 'pps_other_fees_pct', (string) max( 0.0, min( 100.0, $pct ) ) );
+	}
+
 	// -------------------------------------------------------------------------
-	// Getters
+	// Getters produit
 	// -------------------------------------------------------------------------
 
 	public static function get_cost_cfa( int $id ): string {
@@ -43,11 +54,6 @@ class PPS_Data {
 
 	public static function get_cost_usd( int $id ): string {
 		$val = get_post_meta( $id, self::META_COST_USD, true );
-		return ( is_numeric( $val ) && (float) $val >= 0 ) ? (string) (float) $val : '';
-	}
-
-	public static function get_fees_pct( int $id ): string {
-		$val = get_post_meta( $id, self::META_FEES_PCT, true );
 		return ( is_numeric( $val ) && (float) $val >= 0 ) ? (string) (float) $val : '';
 	}
 
@@ -100,15 +106,6 @@ class PPS_Data {
 				delete_post_meta( $id, self::META_COST_USD );
 			} else {
 				update_post_meta( $id, self::META_COST_USD, (string) (float) $val );
-			}
-		}
-
-		if ( array_key_exists( 'fees_pct', $data ) ) {
-			$val = (string) $data['fees_pct'];
-			if ( '' === $val || ! is_numeric( $val ) ) {
-				delete_post_meta( $id, self::META_FEES_PCT );
-			} else {
-				update_post_meta( $id, self::META_FEES_PCT, (string) max( 0.0, (float) $val ) );
 			}
 		}
 
@@ -203,7 +200,6 @@ class PPS_Data {
 			'cost_cfa'      => self::get_cost_cfa( $id ),
 			'cost_usd'      => self::get_cost_usd( $id ),
 			'cost_manual'   => self::is_cost_manual( $id ),
-			'fees_pct'      => self::get_fees_pct( $id ),
 			'attributes'    => $product instanceof WC_Product_Variation
 			                   ? wc_get_formatted_variation( $product, true, false )
 			                   : '',

@@ -27,6 +27,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 					value="<?php echo esc_attr( $usd_rate ); ?>" min="1" step="1">
 			</label>
 
+			<label class="pps-rate-label">
+				<?php esc_html_e( 'Frais paiement %', 'presellia-pricing-studio' ); ?>
+				<input type="number" id="pps-global-fees" class="pps-rate-input"
+					value="<?php echo esc_attr( PPS_Data::get_fees_pct() ); ?>" min="0" max="100" step="0.1">
+			</label>
+
 			<select id="pps-filter-cat" class="pps-select">
 				<option value=""><?php esc_html_e( 'Toutes catégories', 'presellia-pricing-studio' ); ?></option>
 				<?php foreach ( $categories as $cat ) : ?>
@@ -68,7 +74,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<thead>
 				<tr class="pps-thead-groups">
 					<th colspan="2"  class="pps-group-header pps-gh-product"><?php esc_html_e( 'Produit', 'presellia-pricing-studio' ); ?></th>
-					<th colspan="4"  class="pps-group-header pps-gh-costs"><?php esc_html_e( 'Coûts sourcing', 'presellia-pricing-studio' ); ?></th>
+					<th colspan="3"  class="pps-group-header pps-gh-costs"><?php esc_html_e( 'Coûts sourcing', 'presellia-pricing-studio' ); ?></th>
 					<th colspan="2"  class="pps-group-header pps-gh-client"><?php esc_html_e( 'Prix client', 'presellia-pricing-studio' ); ?></th>
 					<th colspan="2"  class="pps-group-header pps-gh-partner"><?php esc_html_e( 'Prix revendeur', 'presellia-pricing-studio' ); ?></th>
 					<th colspan="4"  class="pps-group-header pps-gh-margins"><?php esc_html_e( 'Rentabilité', 'presellia-pricing-studio' ); ?></th>
@@ -80,7 +86,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<th>SKU</th>
 					<th class="pps-group-costs">USD</th>
 					<th class="pps-group-costs">CFA</th>
-					<th class="pps-group-costs">Frais %</th>
 					<th class="pps-group-costs"><?php esc_html_e( 'Base coût', 'presellia-pricing-studio' ); ?></th>
 					<th class="pps-group-client"><?php esc_html_e( 'Régulier', 'presellia-pricing-studio' ); ?></th>
 					<th class="pps-group-client">Promo</th>
@@ -100,7 +105,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<?php foreach ( $grouped as $cat_name => $products ) : ?>
 				<tbody class="pps-cat-group" data-cat="<?php echo esc_attr( $cat_name ); ?>">
 					<tr class="pps-cat-header">
-						<td colspan="18"><strong><?php echo esc_html( strtoupper( $cat_name ) ); ?></strong></td>
+						<td colspan="17"><strong><?php echo esc_html( strtoupper( $cat_name ) ); ?></strong></td>
 					</tr>
 					<?php foreach ( $products as $product ) : ?>
 						<?php $this->render_product_row( $product ); ?>

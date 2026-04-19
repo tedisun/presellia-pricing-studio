@@ -1,5 +1,12 @@
 # Changelog — Presellia Pricing Studio
 
+## [1.1.0] — 2026-04-18
+
+### Frais de paiement globaux
+- Les frais % (ex : CinetPay ~2,5%) sont désormais une option globale (`pps_other_fees_pct`) configurée dans la barre de contrôles, au lieu d'un champ par produit
+- La colonne "Frais %" disparaît du tableau ; les calculs de marge utilisent l'entrée globale en temps réel
+- Sauvegarde des frais via AJAX bulk save (nouveau param `fees_pct`)
+
 ## [1.0.0] — 2026-04-18
 
 ### Initial release
