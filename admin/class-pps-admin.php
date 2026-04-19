@@ -192,10 +192,12 @@ class PPS_Admin {
 			<?php endif; ?>
 
 			<td class="pps-col-price-regular pps-group-client">
-				<?php echo $price_regular !== null ? wp_kses_post( wc_price( $price_regular ) ) : '—'; ?>
+				<input type="number" class="pps-input pps-price-regular" min="0" step="1"
+					value="<?php echo esc_attr( $price_regular ?? '' ); ?>" placeholder="—">
 			</td>
 			<td class="pps-col-price-sale pps-group-client">
-				<?php echo $price_sale !== null ? wp_kses_post( wc_price( $price_sale ) ) : '—'; ?>
+				<input type="number" class="pps-input pps-price-sale" min="0" step="1"
+					value="<?php echo esc_attr( $price_sale ?? '' ); ?>" placeholder="—">
 			</td>
 
 			<?php if ( $has_vars ) : ?>
@@ -326,8 +328,9 @@ class PPS_Admin {
 		$saved = 0;
 
 		foreach ( $products_data as $id_str => $fields ) {
-			$id = (int) $id_str;
-			if ( $id <= 0 || ! wc_get_product( $id ) ) {
+			$id      = (int) $id_str;
+			$product = wc_get_product( $id );
+			if ( $id <= 0 || ! $product ) {
 				continue;
 			}
 
@@ -350,6 +353,24 @@ class PPS_Admin {
 			}
 
 			PPS_Data::save_product_data( $id, $data );
+
+			$price_changed = false;
+			if ( isset( $fields['regular_price'] ) ) {
+				$rp = sanitize_text_field( (string) $fields['regular_price'] );
+				if ( '' !== $rp && is_numeric( $rp ) && (float) $rp > 0 ) {
+					$product->set_regular_price( wc_format_decimal( $rp ) );
+					$price_changed = true;
+				}
+			}
+			if ( isset( $fields['sale_price'] ) ) {
+				$sp = sanitize_text_field( (string) $fields['sale_price'] );
+				$product->set_sale_price( '' === $sp ? '' : wc_format_decimal( $sp ) );
+				$price_changed = true;
+			}
+			if ( $price_changed ) {
+				$product->save();
+			}
+
 			$saved++;
 		}
 

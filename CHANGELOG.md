@@ -1,5 +1,12 @@
 # Changelog — Presellia Pricing Studio
 
+## [1.2.0] — 2026-04-19
+
+### Prix client éditables
+- Les colonnes "Prix régulier" et "Promo" sont désormais des champs éditables directement dans le tableau
+- La modification d'un prix recalcule immédiatement les marges en temps réel
+- La sauvegarde (par ligne ou bulk) appelle `$product->set_regular_price()` / `set_sale_price()` + `$product->save()` pour rester en sync WooCommerce
+
 ## [1.1.0] — 2026-04-18
 
 ### Frais de paiement globaux

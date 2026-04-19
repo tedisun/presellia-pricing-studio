@@ -3,7 +3,7 @@
  * Plugin Name:  Presellia Pricing Studio
  * Plugin URI:   https://presellia.com
  * Description:  Éditeur de prix et analyse de rentabilité — coûts sourcing USD/CFA, marges client/revendeur, paliers dégressifs, analytics WooCommerce.
- * Version:      1.1.0
+ * Version:      1.2.0
  * Author:       Presellia
  * Text Domain:  presellia-pricing-studio
  * Requires PHP: 8.0
@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'PPS_VERSION',     '1.1.0' );
+define( 'PPS_VERSION',     '1.2.0' );
 define( 'PPS_PLUGIN_DIR',  plugin_dir_path( __FILE__ ) );
 define( 'PPS_PLUGIN_URL',  plugin_dir_url( __FILE__ ) );
 define( 'PPS_PLUGIN_FILE', __FILE__ );

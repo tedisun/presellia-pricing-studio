@@ -171,7 +171,9 @@
 	height: 26px !important;
 	box-sizing: border-box;
 }
-.pps-col-cost-cfa .pps-input { width: 88px !important; }
+.pps-col-cost-cfa .pps-input   { width: 88px !important; }
+.pps-col-price-regular .pps-input,
+.pps-col-price-sale .pps-input { width: 88px !important; }
 
 .pps-cfa-wrap { display: flex; align-items: center; gap: 3px; }
 

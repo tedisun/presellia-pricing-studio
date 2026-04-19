@@ -30,8 +30,8 @@ function recalcRow( row ) {
 	const costCfa      = parseFloat( row.querySelector( '.pps-cost-cfa' )?.value )      || 0;
 	const feesPct      = parseFloat( document.getElementById( 'pps-global-fees' )?.value ) || ppsStudio.feesPct || 0;
 	const partnerPrice = parseFloat( row.querySelector( '.pps-partner-price' )?.value ) || 0;
-	const priceRegular = parseFloat( row.dataset.priceRegular ) || 0;
-	const priceSale    = parseFloat( row.dataset.priceSale )    || 0;
+	const priceRegular = parseFloat( row.querySelector( '.pps-price-regular' )?.value ) || 0;
+	const priceSale    = parseFloat( row.querySelector( '.pps-price-sale' )?.value )    || 0;
 	const clientPrice  = priceSale > 0 ? priceSale : priceRegular;
 
 	// Affiche le coût CFA de base (colonne de référence visuelle)
@@ -231,7 +231,11 @@ function bindEvents() {
 			handleUsdChange( row, e.target );
 		} else if ( e.target.classList.contains( 'pps-cost-cfa' ) ) {
 			handleCfaChange( row, e.target );
-		} else if ( e.target.classList.contains( 'pps-partner-price' ) ) {
+		} else if (
+			e.target.classList.contains( 'pps-partner-price' ) ||
+			e.target.classList.contains( 'pps-price-regular' ) ||
+			e.target.classList.contains( 'pps-price-sale' )
+		) {
 			recalcRow( row );
 		}
 	} );
@@ -400,10 +404,12 @@ async function bulkSave() {
 function collectRowData( row, tiers ) {
 	const cfaInput = row.querySelector( '.pps-cost-cfa' );
 	return {
-		cost_usd:          row.querySelector( '.pps-cost-usd' )?.value      || '',
-		cost_cfa:          cfaInput?.value                                   || '',
+		regular_price:     row.querySelector( '.pps-price-regular' )?.value  || '',
+		sale_price:        row.querySelector( '.pps-price-sale' )?.value     || '',
+		cost_usd:          row.querySelector( '.pps-cost-usd' )?.value       || '',
+		cost_cfa:          cfaInput?.value                                    || '',
 		cost_cfa_is_manual: cfaInput?.dataset.wasManual === '1' ? '1' : '0',
-		partner_price:     row.querySelector( '.pps-partner-price' )?.value || '',
+		partner_price:     row.querySelector( '.pps-partner-price' )?.value  || '',
 		partner_tiers:     JSON.stringify( tiers ),
 	};
 }
